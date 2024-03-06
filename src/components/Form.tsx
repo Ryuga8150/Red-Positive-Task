@@ -43,7 +43,7 @@ const Form = ({ user = {}, url, method }: FormProps) => {
   const onSubmit: SubmitHandler<Inputs> = async function (formData) {
     try {
       const res = await fetch(url, {
-        method: "PUT",
+        method,
         headers: {
           "Content-Type": "application/json",
         },
