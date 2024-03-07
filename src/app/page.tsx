@@ -2,7 +2,8 @@ import TableContainer from "@/components/TableContainer";
 
 const getUsers = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/users", {
+    let baseURL = "https://red-positive-task.vercel.app/";
+    const res = await fetch(`${baseURL}/api/users`, {
       cache: "no-store",
     });
 
