@@ -1,8 +1,15 @@
 import TableContainer from "@/components/TableContainer";
+import { headers } from "next/headers";
 
-const getUsers = async () => {
+const getUsers = async (host: string) => {
   try {
-    let baseURL = "https://red-positive-task.vercel.app/";
+    let baseURL =
+      process.env.NODE_ENV === "development"
+        ? `http://${host}/`
+        : `https://${host}/`;
+
+    console.log(baseURL);
+
     const res = await fetch(`${baseURL}/api/users`, {
       cache: "no-store",
     });
@@ -16,8 +23,22 @@ const getUsers = async () => {
     console.log("Error loading users: ", error);
   }
 };
+
+// import type { GetServerSideProps, NextPage } from "next";
+
+// type Props = { host: string | null };
+
+// export const getServerSideProps: GetServerSideProps<Props> = async (
+//   context
+// ) => ({ props: { host: context.req.headers.host || null } });
+
+// const Page => <p>Welcome to {host || "unknown host"}!</p>;
+
 export default async function Home() {
-  const users = await getUsers();
+  const header = headers();
+  const host = header.get("host") || "";
+  // console.log(header.get("protocol"));
+  const users = await getUsers(host);
   console.log(users);
   if (!users) return <p>Loading...</p>;
   return (
