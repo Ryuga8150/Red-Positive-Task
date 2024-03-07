@@ -1,5 +1,4 @@
-import Table from "@/components/Table";
-import Link from "next/link";
+import TableContainer from "@/components/TableContainer";
 
 const getUsers = async () => {
   try {
@@ -23,20 +22,7 @@ export default async function Home() {
       <h1 className="text-center text-4xl font-semibold text-slate-100 mb-12">
         TABULATE
       </h1>
-      <div className="min-w-[20rem] mx-auto px-8">
-        <Table users={users.data.users} />
-        {/* <CreateForm/> */}
-        <div className="w-full mt-5 flex items-center">
-          <Link href={`/createUser`} className="ml-auto">
-            <button
-              className="py-1.5 px-4  bg-green-500 text-green-950 ml-auto"
-              // onClick={() => setOpen(true)}
-            >
-              Add
-            </button>
-          </Link>
-        </div>
-      </div>
+      <TableContainer users={users.data.users} />
       {/* <Form open={open} onOpen={setOpen} /> */}
     </div>
   );

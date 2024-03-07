@@ -24,21 +24,26 @@ const schema = yup.object({
 });
 
 type FormProps = {
-  user?: Inputs | {};
+  user?: Inputs;
   url: string;
   method: string;
 };
 
-const Form = ({ user = {}, url, method }: FormProps) => {
+const Form = ({
+  user = { name: "", phone: "", email: "", hobbies: "" },
+  url,
+  method,
+}: FormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({
+    defaultValues: user,
     resolver: yupResolver(schema),
   });
-  reset(user);
+  // reset(user);
   const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = async function (formData) {
     try {
@@ -55,6 +60,7 @@ const Form = ({ user = {}, url, method }: FormProps) => {
       }
       // reset();
       router.push("/");
+      router.refresh();
     } catch (err) {
       console.log(err);
     }
@@ -63,6 +69,12 @@ const Form = ({ user = {}, url, method }: FormProps) => {
   const onError: SubmitErrorHandler<Inputs> = function (error) {
     console.log(error);
   };
+  // useEffect(
+  //   function () {
+  //     if (user) reset(user);
+  //   },
+  //   [reset, user]
+  // );
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="w-[18rem]">
       <h2 className="text-center mb-4 text-2xl tracking-wider font-semibold text-slate-50">

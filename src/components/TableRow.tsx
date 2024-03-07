@@ -5,6 +5,7 @@ import Link from "next/link";
 
 type TableProps = {
   select?: boolean;
+  children: React.ReactNode;
   data: {
     _id: string;
     name: string;
@@ -14,19 +15,14 @@ type TableProps = {
   };
 };
 
-const TableRow = ({ select, data }: TableProps) => {
+const TableRow = ({ select, data, children }: TableProps) => {
   return (
     <div
       className={`${
         select && "bg-[#1F1F1F]"
       } grid grid-cols-[0.25fr_repeat(3,1fr)_250px_1fr_0.5fr] items-center py-2 rounded-md`}
     >
-      <div className="flex items-center justify-center">
-        <input
-          type="checkbox"
-          className="appearance-none w-4 h-4 border-[1.8px] bg-transparent rounded border-border-light"
-        />
-      </div>
+      <div className="flex items-center justify-center">{children}</div>
       <span className="px-1 py-1 text-md">{data?._id.slice(0, 12)}</span>
       <span className="px-1 py-1 text-md">{data?.name}</span>
       <span className="px-1 py-1"> {data?.phone}</span>
