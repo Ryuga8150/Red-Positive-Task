@@ -29,7 +29,7 @@ export default async function Home() {
   const host = header.get("host") || "";
   // console.log(header.get("protocol"));
   const users = await getUsers(host);
-  console.log(users);
+  // console.log(users);
   if (!users) return <p>Loading...</p>;
   return (
     <div className="min-w-[10rem] ml-auto mr-auto  h-full px-[2.4rem] pt-[1.8rem] pb-[3.2rem] relative">

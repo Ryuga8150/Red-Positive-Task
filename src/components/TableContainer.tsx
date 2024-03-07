@@ -17,7 +17,7 @@ type Props = {
 };
 
 const TableContainer = ({ users }: Props) => {
-  const formRef = useRef<HTMLFormElement | null>(null);
+  // const formRef = useRef<HTMLFormElement | null>(null);
   const [error, setError] = useState<null | boolean>(null);
   const [success, setSuccess] = useState<null | boolean>(null);
   const [checkAll, setCheckAll] = useState<boolean>(false);
@@ -25,42 +25,33 @@ const TableContainer = ({ users }: Props) => {
 
   const sendEmail = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-
     try {
-      let apiData = {};
+      let apiData = [];
       if (checkAll) apiData = users;
       else apiData = users.filter((user) => checkedArr.indexOf(user._id) > -1);
 
-      console.log(apiData);
-
-      let data = {
-        service_id: process.env.NEXT_PUBLIC_SERVICE_ID || "",
-        template_id: process.env.NEXT_PUBLIC_TEMPLATE_ID || "",
-        user_id: process.env.NEXT_PUBLIC_PUBLIC_KEY || "",
-        template_params: {
-          name: "James",
-          email: "test@gmail.com",
-        },
-      };
-
-      console.log(data);
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      // console.log(apiData);
+      if (apiData.length === 0) {
+        alert("Select Users for mail");
+        return;
+      }
+      const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
-        body: JSON.stringify(apiData),
+        body: JSON.stringify({
+          data: apiData,
+        }),
       });
-      if (!res.ok) {
-        throw new Error("Failed To send data");
-      }
-      const dataF = await res.json();
-      console.log(dataF);
-      console.log("MAil Sent");
+      const data = await response.json();
+      alert(data.message);
     } catch (err) {
       console.log(err);
+      alert(err);
     }
   };
+
   return (
     <div className="min-w-[20rem] mx-auto px-8">
       <Table
@@ -75,7 +66,8 @@ const TableContainer = ({ users }: Props) => {
         <button
           className="py-1.5 px-4  bg-orange-500 text-orange-950 ml-auto"
           // onClick={() => setOpen(true)}
-          onClick={sendEmail}
+          // onClick={sendEmail}
+          onClick={(e) => sendEmail(e)}
         >
           Email
         </button>

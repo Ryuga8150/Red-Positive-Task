@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const { name, email, phone, hobbies } = await request.json();
-  console.log({ name, email, phone, hobbies });
+  // console.log({ name, email, phone, hobbies });
   await connectToDB();
   const user = await User.create({ name, email, phone, hobbies });
-  console.log(user);
+  // console.log(user);
   return NextResponse.json(
     { statusMessage: "success", data: { user } },
     { status: 201 }
@@ -28,7 +28,7 @@ export async function DELETE(request: NextRequest) {
   await connectToDB();
 
   const user = await User.findByIdAndDelete(id);
-  console.log(user);
+  // console.log(user);
   if (!user)
     return NextResponse.json({ statusMessage: "fail" }, { status: 500 });
 
