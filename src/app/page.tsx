@@ -7,16 +7,17 @@ const getUsers = async () => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topics");
+      throw new Error("Failed to fetch users");
     }
 
     return res.json();
   } catch (error) {
-    console.log("Error loading topics: ", error);
+    console.log("Error loading users: ", error);
   }
 };
 export default async function Home() {
   const users = await getUsers();
+  console.log(users);
   if (!users) return <p>Loading...</p>;
   return (
     <div className="min-w-[10rem] ml-auto mr-auto  h-full px-[2.4rem] pt-[1.8rem] pb-[3.2rem] relative">
