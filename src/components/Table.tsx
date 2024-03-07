@@ -43,7 +43,11 @@ const Table = ({
       </TableHeader>
 
       {users.map((data, ind) => (
-        <TableRow key={ind} data={data}>
+        <TableRow
+          key={ind}
+          data={data}
+          select={checkAll || checkedArr.indexOf(data._id) > -1}
+        >
           <input
             type="checkbox"
             // className="appearance-none w-4 h-4 border-[1.8px] bg-transparent rounded border-border-light"

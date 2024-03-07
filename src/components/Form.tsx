@@ -76,7 +76,10 @@ const Form = ({
   //   [reset, user]
   // );
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)} className="w-[18rem]">
+    <form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      className="w-[25rem] mb-40 bg-background-dark px-6 pt-4 pb-6"
+    >
       <h2 className="text-center mb-4 text-2xl tracking-wider font-semibold text-slate-50">
         Details
       </h2>

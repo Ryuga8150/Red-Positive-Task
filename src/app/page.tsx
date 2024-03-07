@@ -8,7 +8,7 @@ const getUsers = async (host: string) => {
         ? `http://${host}/`
         : `https://${host}/`;
 
-    console.log(baseURL);
+    // console.log(baseURL);
 
     const res = await fetch(`${baseURL}/api/users`, {
       cache: "no-store",
@@ -23,16 +23,6 @@ const getUsers = async (host: string) => {
     console.log("Error loading users: ", error);
   }
 };
-
-// import type { GetServerSideProps, NextPage } from "next";
-
-// type Props = { host: string | null };
-
-// export const getServerSideProps: GetServerSideProps<Props> = async (
-//   context
-// ) => ({ props: { host: context.req.headers.host || null } });
-
-// const Page => <p>Welcome to {host || "unknown host"}!</p>;
 
 export default async function Home() {
   const header = headers();

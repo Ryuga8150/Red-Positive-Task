@@ -29,9 +29,9 @@ const UpdateUser = async ({ params }: Props) => {
   const user = await getUser(id);
   const url = `/api/users/${user.data.user._id}`;
   const method = "PUT";
-  
+
   return (
-    <div>
+    <div className="h-screen flex items-center justify-center">
       <Form user={user.data.user} url={url} method={method} />
     </div>
   );

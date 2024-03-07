@@ -8,7 +8,7 @@ const CreateUser = (props: Props) => {
   const url = `/api/users`;
   const method = "POST";
   return (
-    <div>
+    <div className="h-screen flex items-center justify-center">
       <Form url={url} method={method} />
     </div>
   );
