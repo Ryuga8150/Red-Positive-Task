@@ -41,8 +41,8 @@ export async function POST(request: NextRequest) {
 
     const mailOption = {
       from: process.env.EMAIL_USER,
-      // to: "ryuga13.1.4@gmail.com",
-      to: "info@redpositive.in",
+      to: "ryuga13.1.4@gmail.com",
+      // to: "info@redpositive.in",
       subject: "Send User Data",
       html: "<h1><b>USER DATA</b></h1>" + html,
     };
