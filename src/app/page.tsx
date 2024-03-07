@@ -17,6 +17,7 @@ const getUsers = async () => {
 };
 export default async function Home() {
   const users = await getUsers();
+  if (!users) return <p>Loading...</p>;
   return (
     <div className="min-w-[10rem] ml-auto mr-auto  h-full px-[2.4rem] pt-[1.8rem] pb-[3.2rem] relative">
       <h1 className="text-center text-4xl font-semibold text-slate-100 mb-12">
